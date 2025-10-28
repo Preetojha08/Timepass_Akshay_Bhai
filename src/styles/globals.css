@@ -80,6 +80,43 @@
   resize: vertical;
 }
 
+.flip-card {
+  perspective: 1500px;
+}
+
+.flip-card-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.group:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 9999px;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-inner {
+    transition: none;
+  }
+
+  .group:hover .flip-card-inner {
+    transform: none;
+  }
+}
+
 html {
   font-family: 'Inter', system-ui, sans-serif;
 }

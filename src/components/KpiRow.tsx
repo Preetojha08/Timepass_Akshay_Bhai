@@ -116,7 +116,8 @@ const KpiRow = ({ kpis }: KpiRowProps) => {
       {kpis.map((kpi, index) => (
         <article
           key={kpi.label}
-          className="flex min-h-[110px] flex-col justify-between rounded-2xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-sky-400 dark:border-slate-800 dark:bg-slate-900/60"
+          className="flex min-h-[110px] flex-col justify-between rounded-2xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-sky-400 animate-slide-up motion-reduce:animate-none dark:border-slate-800 dark:bg-slate-900/60"
+          style={{ animationDelay: `${index * 0.08}s` }}
         >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-500">{kpi.label}</p>
           <p className="mt-4 text-3xl font-semibold leading-tight text-slate-900 tabular-nums dark:text-slate-100">

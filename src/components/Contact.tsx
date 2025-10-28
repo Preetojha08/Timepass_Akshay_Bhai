@@ -13,7 +13,10 @@ const Contact = ({ email, linkedin }: ContactProps) => {
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-5 md:gap-8">
       <div className="md:col-span-3">
-        <div className="rounded-2xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
+        <div
+          className="rounded-2xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur animate-slide-up motion-reduce:animate-none dark:border-slate-800 dark:bg-slate-900/60"
+          style={{ animationDelay: '0.05s' }}
+        >
           <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Let's Collaborate</h3>
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
             Reach out for launch plans, audits, or steady operations during growth.
@@ -61,7 +64,8 @@ const Contact = ({ email, linkedin }: ContactProps) => {
       </div>
 
       <aside className="md:col-span-2">
-        <div className="flex h-full flex-col rounded-2xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
+        <div className="flex h-full flex-col rounded-2xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur animate-slide-up motion-reduce:animate-none dark:border-slate-800 dark:bg-slate-900/60"
+          style={{ animationDelay: '0.15s' }}>
           <h4 className="text-base font-semibold text-slate-900 dark:text-slate-100">Prefer a direct line?</h4>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
             Email{' '}
@@ -88,4 +92,3 @@ const Contact = ({ email, linkedin }: ContactProps) => {
 };
 
 export default Contact;
-

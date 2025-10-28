@@ -21,57 +21,70 @@ const Hero = ({
   linkedin,
   resumeUrl,
   avatarUrl,
-}: HeroProps) => (
-  <div className="grid grid-cols-1 gap-10 md:gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
-    <div className="space-y-6 md:space-y-8">
-      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-500">{location}</p>
-      <div className="space-y-4">
-        <h1 className="text-4xl font-semibold text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-6xl">
-          {name}
-        </h1>
-        <p className="text-lg font-semibold text-slate-600 dark:text-slate-300 sm:text-xl">{role}</p>
-        <p className="max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg">
-          Reducing touches, increasing flow. I design warehouse programs that keep inventory honest, teams confident,
-          and customers on time.
-        </p>
+}: HeroProps) => {
+  const illustrationSrc = '/avatar.png';
+
+  return (
+    <div className="grid grid-cols-1 gap-10 animate-slide-up motion-reduce:animate-none md:gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+      <div className="space-y-6 md:space-y-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-500">{location}</p>
+        <div className="space-y-4">
+          <h1 className="text-4xl font-semibold text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-6xl">
+            {name}
+          </h1>
+          <p className="text-lg font-semibold text-slate-600 dark:text-slate-300 sm:text-xl">{role}</p>
+          <p className="max-w-2xl text-base text-slate-600 dark:text-slate-400 sm:text-lg">
+            Reducing touches, increasing flow. I design warehouse programs that keep inventory honest, teams confident,
+            and customers on time.
+          </p>
+        </div>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Button as="a" href={resumeUrl} size="lg">
+            Download CV
+          </Button>
+          <Button as="a" href="#contact" variant="outline" size="lg">
+            Contact
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 gap-3 text-sm text-slate-600 dark:text-slate-400 sm:grid-cols-3">
+          <ContactChip href={`mailto:${email}`} label="Email" value={email}>
+            <MailIcon />
+          </ContactChip>
+          <ContactChip href={`tel:${phone.replace(/[^+\d]/g, '')}`} label="Phone" value={phone}>
+            <PhoneIcon />
+          </ContactChip>
+          <ContactChip href={linkedin} label="LinkedIn" value="Connect" external>
+            <LinkIcon />
+          </ContactChip>
+        </div>
       </div>
-      <div className="mt-6 flex flex-wrap items-center gap-3">
-        <Button as="a" href={resumeUrl} size="lg">
-          Download CV
-        </Button>
-        <Button as="a" href="#contact" variant="outline" size="lg">
-          Contact
-        </Button>
-      </div>
-      <div className="grid grid-cols-1 gap-3 text-sm text-slate-600 dark:text-slate-400 sm:grid-cols-3">
-        <ContactChip href={`mailto:${email}`} label="Email" value={email}>
-          <MailIcon />
-        </ContactChip>
-        <ContactChip href={`tel:${phone.replace(/[^+\d]/g, '')}`} label="Phone" value={phone}>
-          <PhoneIcon />
-        </ContactChip>
-        <ContactChip href={linkedin} label="LinkedIn" value="Connect" external>
-          <LinkIcon />
-        </ContactChip>
+      <div className="flex items-center justify-center">
+        <div className="group relative inline-flex h-64 w-64 items-center justify-center sm:h-72 sm:w-72 lg:h-80 lg:w-80">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-sky-400/30 via-emerald-400/20 to-transparent blur-2xl" />
+          <div className="flip-card relative h-full w-full rounded-full bg-white/70 shadow-lift backdrop-blur dark:bg-slate-900/60">
+            <div className="flip-card-inner rounded-full">
+              <div className="flip-card-face flex items-center justify-center rounded-full">
+                <img
+                  src={illustrationSrc}
+                  alt={`Illustration of ${name}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full rounded-full object-cover"
+                  onError={(event) => {
+                    event.currentTarget.src = avatarUrl;
+                  }}
+                />
+              </div>
+              <div className="flip-card-face flip-card-back flex items-center justify-center rounded-full bg-sky-500/10 text-5xl font-bold text-sky-500 sm:text-6xl">
+                AD
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div className="flex items-center justify-center">
-      <figure className="relative inline-flex h-64 w-64 items-center justify-center rounded-full bg-white/70 shadow-lift backdrop-blur sm:h-72 sm:w-72 lg:h-80 lg:w-80 dark:bg-slate-900/60">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 rounded-full bg-gradient-to-br from-sky-400/30 via-emerald-400/20 to-transparent blur-2xl"
-        />
-        <img
-          src={avatarUrl}
-          alt={`Portrait of ${name}`}
-          loading="lazy"
-          decoding="async"
-          className="relative h-44 w-44 rounded-full border-4 border-white object-cover sm:h-52 sm:w-52 lg:h-60 lg:w-60 dark:border-slate-900"
-        />
-      </figure>
-    </div>
-  </div>
-);
+  );
+};
 
 type ContactChipProps = {
   href: string;
@@ -86,9 +99,9 @@ const ContactChip = ({ href, label, value, children, external }: ContactChipProp
     href={href}
     target={external ? '_blank' : undefined}
     rel={external ? 'noopener noreferrer' : undefined}
-    className="group flex items-center gap-4 rounded-2xl border border-slate-200/70 bg-white/70 px-4 py-3 text-sm font-medium text-slate-900 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-sky-400 focus-visible:outline-0 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-100"
+    className="group flex items-center gap-4 rounded-2xl border border-slate-200/70 bg-white/70 px-5 py-4 text-sm font-medium text-slate-900 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-sky-400 focus-visible:outline-0 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-100"
   >
-    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-sky-500/10 text-sky-500 transition duration-300 group-hover:bg-sky-500/20 sm:h-12 sm:w-12">
+    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-500/10 text-sky-500 transition duration-300 group-hover:bg-sky-500/20 sm:h-14 sm:w-14">
       {children}
     </span>
     <span className="flex flex-col">

@@ -104,10 +104,11 @@ const SectionHeading = ({
 
 const HighlightsList = ({ items }: { items: string[] }) => (
   <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
-    {items.map((item) => (
+    {items.map((item, index) => (
       <li
         key={item}
-        className="flex items-center gap-3 rounded-2xl border border-slate-200/60 bg-white/70 px-4 py-3 text-sm text-slate-600 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-400"
+        className="flex items-center gap-3 rounded-2xl border border-slate-200/60 bg-white/70 px-4 py-3 text-sm text-slate-600 shadow-sm backdrop-blur animate-slide-up motion-reduce:animate-none dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-400"
+        style={{ animationDelay: `${index * 0.08}s` }}
       >
         <span aria-hidden="true" className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
         <span>{item}</span>
@@ -172,7 +173,7 @@ export default function App() {
       </a>
       <Navbar name={profile.name} />
       <main id="content" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <section id="about" className="section">
+        <section id="about" className="section animate-fade-in motion-reduce:animate-none">
           <Hero
             name={profile.name}
             role={profile.role}
@@ -184,19 +185,19 @@ export default function App() {
             avatarUrl={profile.avatarUrl}
           />
         </section>
-        <section id="highlights" className="section">
+        <section id="highlights" className="section animate-fade-in motion-reduce:animate-none">
           <HighlightsSection />
         </section>
-        <section id="experience" className="section">
+        <section id="experience" className="section animate-fade-in motion-reduce:animate-none">
           <ExperienceGrid />
         </section>
-        <section id="projects" className="section">
+        <section id="projects" className="section animate-fade-in motion-reduce:animate-none">
           <ProjectsGrid />
         </section>
-        <section id="skills" className="section">
+        <section id="skills" className="section animate-fade-in motion-reduce:animate-none">
           <SkillsGrid />
         </section>
-        <section id="contact" className="section">
+        <section id="contact" className="section animate-fade-in motion-reduce:animate-none">
           <Contact email={profile.email} linkedin={profile.linkedin} />
         </section>
       </main>
@@ -204,4 +205,3 @@ export default function App() {
     </>
   );
 }
-
