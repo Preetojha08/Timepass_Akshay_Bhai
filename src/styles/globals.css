@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --muted: #e2e8f0;
+  --text: #0b1220;
+  --primary: #0ea5e9;
+  --primary-foreground: #03202b;
+  --accent: #22c55e;
+  --accent-foreground: #0a1f12;
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #0b1220;
+  --card: #0f172a;
+  --muted: #1e293b;
+  --text: #e2e8f0;
+  --primary: #0ea5e9;
+  --primary-foreground: #041725;
+  --accent: #22c55e;
+  --accent-foreground: #d1fae5;
+}
+
+html {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-transparent;
+  }
+
+  body {
+    @apply bg-skin-base text-skin-base antialiased;
+    margin: 0;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    @apply text-primary underline-offset-4;
+  }
+
+  a:hover {
+    @apply text-primary;
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .motion-reduce * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 80%, transparent);
+  color: var(--primary-foreground);
+}

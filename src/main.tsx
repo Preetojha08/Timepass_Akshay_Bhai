@@ -1,0 +1,22 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import { applyTheme, getInitialTheme } from './lib/theme';
+import './styles/globals.css';
+
+applyTheme(getInitialTheme());
+
+const container = document.getElementById('root');
+
+if (!container) {
+  throw new Error('Root element not found');
+}
+
+const root = createRoot(container);
+
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+
