@@ -14,33 +14,27 @@ const quickLinks = [
 ];
 
 const Footer = ({ name, location, email }: FooterProps) => (
-  <footer className="border-t border-skin-muted bg-skin-card/60 py-10 text-sm text-skin-muted">
-    <div className="container flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+  <footer className="mt-12 border-t border-slate-800/40 py-8 text-sm text-slate-400 sm:mt-16 lg:mt-20 dark:border-slate-700 dark:text-slate-500">
+    <div className="container flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
       <div className="space-y-2">
-        <p className="text-base font-semibold text-skin-base">{name}</p>
+        <p className="text-base font-semibold text-slate-900 dark:text-slate-100">{name}</p>
         <p>{location}</p>
-        <a
-          href={`mailto:${email}`}
-          className="text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
+        <a className="text-sky-500 underline-offset-4 hover:underline" href={`mailto:${email}`}>
           {email}
         </a>
       </div>
       <nav aria-label="Footer quick links">
-        <ul className="flex flex-wrap gap-4 text-sm font-medium text-skin-base">
+        <ul className="flex flex-wrap gap-4 text-sm font-medium text-slate-600 dark:text-slate-300">
           {quickLinks.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                className="transition hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
+              <a className="transition hover:text-sky-500" href={link.href}>
                 {link.label}
               </a>
             </li>
           ))}
         </ul>
       </nav>
-      <p className="text-xs text-skin-muted">
+      <p className="text-xs">
         Copyright {new Date().getFullYear()} {name}. Built for operational excellence.
       </p>
     </div>

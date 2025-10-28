@@ -112,14 +112,14 @@ const KpiRow = ({ kpis }: KpiRowProps) => {
   }, [parsed, reducesMotion]);
 
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
       {kpis.map((kpi, index) => (
         <article
           key={kpi.label}
-          className="flex min-h-[110px] flex-col justify-between rounded-2xl border border-skin-muted bg-skin-card p-6 shadow-[0_6px_30px_-10px_rgba(2,6,23,.25)] transition duration-300 hover:-translate-y-0.5 hover:border-primary"
+          className="flex min-h-[110px] flex-col justify-between rounded-2xl border border-slate-200/60 bg-white/70 p-6 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-sky-400 dark:border-slate-800 dark:bg-slate-900/60"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{kpi.label}</p>
-          <p className="mt-4 text-3xl font-semibold leading-tight text-skin-base tabular-nums">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-500">{kpi.label}</p>
+          <p className="mt-4 text-3xl font-semibold leading-tight text-slate-900 tabular-nums dark:text-slate-100">
             {displayValues[index] ?? kpi.value}
           </p>
         </article>
@@ -129,4 +129,3 @@ const KpiRow = ({ kpis }: KpiRowProps) => {
 };
 
 export default KpiRow;
-

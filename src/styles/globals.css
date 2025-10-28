@@ -12,6 +12,10 @@
   --primary-foreground: #03202b;
   --accent: #22c55e;
   --accent-foreground: #0a1f12;
+  --space-section-sm: 2.5rem;
+  --space-section-md: 3.5rem;
+  --space-section-lg: 5rem;
+  --ring: 0 0 0 3px var(--ring-color, rgba(14, 165, 233, 0.35));
 }
 
 .dark {
@@ -24,6 +28,56 @@
   --primary-foreground: #041725;
   --accent: #22c55e;
   --accent-foreground: #d1fae5;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --space-section-sm: 3rem;
+    --space-section-md: 4rem;
+    --space-section-lg: 5.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --space-section-sm: 3.5rem;
+    --space-section-md: 4.5rem;
+    --space-section-lg: 6rem;
+  }
+}
+
+.section {
+  padding-top: var(--space-section-md);
+  padding-bottom: var(--space-section-md);
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-top: var(--space-section-lg);
+    padding-bottom: var(--space-section-lg);
+  }
+}
+
+:where(button, [type='button'], [type='submit'], a, input, textarea, select):focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.input-base {
+  @apply w-full rounded-xl border border-slate-300/60 bg-white/80 px-4 py-3 text-slate-900 placeholder-slate-500 transition-shadow dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-100 dark:placeholder-slate-400;
+}
+
+.input-base:hover {
+  box-shadow: 0 0 0 1px rgba(2, 6, 23, 0.05);
+}
+
+.input-base:focus {
+  --ring-color: rgba(14, 165, 233, 0.45);
+}
+
+.textarea-lg {
+  min-height: 9rem;
+  resize: vertical;
 }
 
 html {

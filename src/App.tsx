@@ -5,7 +5,6 @@ import Hero from './components/Hero';
 import KpiRow from './components/KpiRow';
 import Navbar from './components/Navbar';
 import Projects, { type Project } from './components/Projects';
-import Section from './components/ui/Section';
 import Skills from './components/Skills';
 
 const profile = {
@@ -87,83 +86,122 @@ const skills = [
 
 const compliance = ['GMP', 'HACCP', 'SQF', 'Health Canada', 'WHMIS', 'OH&S'];
 
-const App = () => (
-  <div className="min-h-screen bg-skin-base text-skin-base transition-colors duration-500">
-    <a
-      href="#content"
-      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[999] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-[color:var(--primary-foreground)]"
-    >
-      Skip to content
-    </a>
-    <Navbar name={profile.name} />
-    <main id="content" className="container pb-16 sm:pb-20 lg:pb-28">
-      <Hero
-        name={profile.name}
-        role={profile.role}
-        location={profile.location}
-        email={profile.email}
-        phone={profile.phone}
-        linkedin={profile.linkedin}
-        resumeUrl={profile.resumeUrl}
-        avatarUrl={profile.avatarUrl}
-      />
-      <Section
-        id="highlights"
-        eyebrow="Results"
-        title="Operational Highlights"
-        description="Core KPIs that demonstrate accuracy, responsiveness, and velocity across the warehouse."
-      >
-        <div className="space-y-8">
-          <KpiRow kpis={kpis} />
-          <ul className="grid grid-cols-1 gap-3 text-sm text-skin-muted md:grid-cols-2">
-            {highlights.map((item) => (
-              <li
-                key={item}
-                className="flex h-full items-center gap-3 rounded-2xl border border-skin-muted bg-skin-card px-4 py-3 text-sm text-skin-base shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-primary"
-              >
-                <span aria-hidden="true" className="inline-flex h-2 w-2 rounded-full bg-accent" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
-      <Section
-        id="experience"
-        eyebrow="Track Record"
-        title="Experience"
-        description="Leadership shaping compliant, high-velocity teams with strong partner alignment."
-      >
-        <Experience items={experience} />
-      </Section>
-      <Section
-        id="projects"
-        eyebrow="Initiatives"
-        title="Projects"
-        description="Targeted programs that delivered measurable outcomes for inventory accuracy and OTIF."
-      >
-        <Projects items={projects} />
-      </Section>
-      <Section
-        id="skills"
-        eyebrow="Toolkit"
-        title="Skills & Compliance"
-        description="Systems expertise and regulatory frameworks that keep operations audit-ready."
-      >
-        <Skills skills={skills} compliance={compliance} />
-      </Section>
-      <Section
-        id="contact"
-        eyebrow="Contact"
-        title="Let's Collaborate"
-        description="Reach out for launch plans, audits, or to steady operations during rapid growth."
-      >
-        <Contact email={profile.email} linkedin={profile.linkedin} />
-      </Section>
-    </main>
-    <Footer name={profile.name} location={profile.location} email={profile.email} />
+const SectionHeading = ({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow: string;
+  title: string;
+  description?: string;
+}) => (
+  <div className="space-y-3">
+    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-500">{eyebrow}</p>
+    <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-100 sm:text-4xl">{title}</h2>
+    {description ? <p className="text-base text-slate-600 dark:text-slate-400 sm:text-lg">{description}</p> : null}
   </div>
 );
 
-export default App;
+const HighlightsList = ({ items }: { items: string[] }) => (
+  <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
+    {items.map((item) => (
+      <li
+        key={item}
+        className="flex items-center gap-3 rounded-2xl border border-slate-200/60 bg-white/70 px-4 py-3 text-sm text-slate-600 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-400"
+      >
+        <span aria-hidden="true" className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+);
+
+const SkillsGrid = () => (
+  <div className="space-y-6 md:space-y-8">
+    <SectionHeading
+      eyebrow="Toolkit"
+      title="Skills & Compliance"
+      description="Systems expertise and regulatory frameworks that keep operations audit-ready."
+    />
+    <Skills skills={skills} compliance={compliance} />
+  </div>
+);
+
+const ProjectsGrid = () => (
+  <div className="space-y-6 md:space-y-8">
+    <SectionHeading
+      eyebrow="Initiatives"
+      title="Projects"
+      description="Targeted programs that delivered measurable outcomes for inventory accuracy and OTIF."
+    />
+    <Projects items={projects} />
+  </div>
+);
+
+const ExperienceGrid = () => (
+  <div className="space-y-6 md:space-y-8">
+    <SectionHeading
+      eyebrow="Track Record"
+      title="Experience"
+      description="Leadership shaping compliant, high-velocity teams with strong partner alignment."
+    />
+    <Experience items={experience} />
+  </div>
+);
+
+const HighlightsSection = () => (
+  <div className="space-y-6 md:space-y-8">
+    <SectionHeading
+      eyebrow="Results"
+      title="Operational Highlights"
+      description="Core KPIs that demonstrate accuracy, responsiveness, and velocity across the warehouse."
+    />
+    <KpiRow kpis={kpis} />
+    <HighlightsList items={highlights} />
+  </div>
+);
+
+export default function App() {
+  return (
+    <>
+      <a
+        href="#content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[999] focus:rounded-full focus:bg-sky-500 focus:px-4 focus:py-2 focus:text-white"
+      >
+        Skip to content
+      </a>
+      <Navbar name={profile.name} />
+      <main id="content" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section id="about" className="section">
+          <Hero
+            name={profile.name}
+            role={profile.role}
+            location={profile.location}
+            email={profile.email}
+            phone={profile.phone}
+            linkedin={profile.linkedin}
+            resumeUrl={profile.resumeUrl}
+            avatarUrl={profile.avatarUrl}
+          />
+        </section>
+        <section id="highlights" className="section">
+          <HighlightsSection />
+        </section>
+        <section id="experience" className="section">
+          <ExperienceGrid />
+        </section>
+        <section id="projects" className="section">
+          <ProjectsGrid />
+        </section>
+        <section id="skills" className="section">
+          <SkillsGrid />
+        </section>
+        <section id="contact" className="section">
+          <Contact email={profile.email} linkedin={profile.linkedin} />
+        </section>
+      </main>
+      <Footer name={profile.name} location={profile.location} email={profile.email} />
+    </>
+  );
+}
 
